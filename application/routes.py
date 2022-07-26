@@ -5,9 +5,9 @@ from flask import request, redirect, url_for, render_template
 
 @app.route('/')
 def index():
-    return "ToDo App"
+    return render_template('layout.html')
 
-@app.route('/view_tasks')
+@app.route('/view-tasks')
 def view_all_tasks():
     tasks = Task.query.all()
     return render_template('view_all.html', entity='Task', tasks=tasks)
