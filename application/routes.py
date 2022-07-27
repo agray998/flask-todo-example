@@ -92,6 +92,8 @@ def update_user(id):
 @app.route('/delete-user/<int:id>')
 def delete_user(id):
     user_to_delete = User.query.get(id)
+    for task in user_to_delete.tasks:
+        db.session.delete(task)
     db.session.delete(user_to_delete)
     db.session.commit()
     return redirect(url_for('view_all_users'))
