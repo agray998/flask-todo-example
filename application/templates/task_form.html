@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="Form">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        {{ form.task_name.label }} {{ form.task_name }}<br>
+        {{ form.task_desc.label }} {{ form.task_desc }}<br>
+        {{ form.due_date.label }}  {{ form.due_date }}<br>
+        {{ form.task_status.label }} {{ form.task_status }}<br>
+        {{ form.assigned_to.label }}  {{ form.assigned_to }}
+        <br>
+        {{ form.submit }}
+    </form>
+</div>
+<div>
+    {% if errors %}
+    {% for error in errors %}
+    <p style="color:red;">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock body %}
