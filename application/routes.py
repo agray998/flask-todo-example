@@ -28,6 +28,7 @@ def create_new_task():
         db.session.add(new_task)
         db.session.commit()
         return redirect(url_for('view_all_tasks'))
+    form.due_date.data = date.today()
     errors = form.due_date.errors
     errors += form.task_name.errors
     return render_template('task_form.html', form = form, errors = errors)

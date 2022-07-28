@@ -8,7 +8,7 @@ class checkDateInFuture():
         self.message = message
     
     def __call__(self, form, field):
-        if field.data < date.today():
+        if field.data is None or field.data < date.today():
             raise ValidationError(self.message)
 
 class UserForm(FlaskForm):
@@ -20,6 +20,6 @@ class TaskForm(FlaskForm):
     task_name = StringField('Task Name', validators=[DataRequired(), Length(min=1, max=20)])
     task_desc = TextAreaField('Description', validators=[DataRequired(), Length(min=1, max=100)])
     task_status = SelectField('Status', choices=[('todo', 'todo'), ('done', 'done')])
-    due_date = DateField('Due Date', validators=[DataRequired(), checkDateInFuture("Please choose a date in the future")])
+    due_date = DateField('Due Date', validators=[checkDateInFuture("Please choose a date in the future")])
     assigned_to = SelectField('Assign To', choices=[])
     submit = SubmitField('Enter')
